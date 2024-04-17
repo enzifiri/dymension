@@ -75,8 +75,17 @@ func (q Querier) DemandOrders(goCtx context.Context, req *types.QueryDemandOrder
 	}
 	ctx := sdk.UnwrapSDKContext(goCtx)
 
+	var fOptions []FilterOption
+
+	if req.Type != "" {
+		fOptions = append(fOptions, WithOrderType(req.Type))
+	}
+	if req.RollappId != "" {
+		fOptions = append(fOptions, WithRollappId(req.RollappId))
+	}
+
 	// Get the demand orders by status
-	demandOrders, err := q.ListDemandOrders(ctx, statusValue)
+	demandOrders, err := q.ListDemandOrders(ctx, statusValue, fOptions...)
 	if err != nil {
 		return nil, status.Error(codes.Internal, err.Error())
 	}

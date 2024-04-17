@@ -163,9 +163,21 @@ type demandOrdersQuery struct {
 	orderType string
 }
 
-type filterOption func(*demandOrdersQuery)
+type FilterOption func(*demandOrdersQuery)
 
-func (k Keeper) ListDemandOrders(ctx sdk.Context, status commontypes.Status, opts ...filterOption) (list []*types.DemandOrder, err error) {
+func WithRollappId(rollappId string) FilterOption {
+	return func(q *demandOrdersQuery) {
+		q.rollappId = rollappId
+	}
+}
+
+func WithOrderType(orderType string) FilterOption {
+	return func(q *demandOrdersQuery) {
+		q.orderType = orderType
+	}
+}
+
+func (k Keeper) ListDemandOrders(ctx sdk.Context, status commontypes.Status, opts ...FilterOption) (list []*types.DemandOrder, err error) {
 	store := ctx.KVStore(k.storeKey)
 	var statusPrefix []byte
 
