@@ -159,24 +159,30 @@ func (m *QueryGetDemandOrderRequest) GetId() string {
 	return ""
 }
 
-// QueryDemandOrdersByStatusRequest is the request type for the Query/GetDemandOrdersByStatus RPC method.
-type QueryDemandOrdersByStatusRequest struct {
+// QueryDemandOrdersRequest is the request type for the Query/GetDemandOrders RPC method.
+type QueryDemandOrdersRequest struct {
 	// id of the demand order to get
 	Status string `protobuf:"bytes,1,opt,name=status,proto3" json:"status,omitempty"`
+	// optional rollapp_id
+	RollappId string `protobuf:"bytes,2,opt,name=rollapp_id,json=rollappId,proto3" json:"rollapp_id,omitempty"`
+	// optional type
+	Type string `protobuf:"bytes,3,opt,name=type,proto3" json:"type,omitempty"`
+	// optional limit
+	Limit int32 `protobuf:"varint,4,opt,name=limit,proto3" json:"limit,omitempty"`
 }
 
-func (m *QueryDemandOrdersByStatusRequest) Reset()         { *m = QueryDemandOrdersByStatusRequest{} }
-func (m *QueryDemandOrdersByStatusRequest) String() string { return proto.CompactTextString(m) }
-func (*QueryDemandOrdersByStatusRequest) ProtoMessage()    {}
-func (*QueryDemandOrdersByStatusRequest) Descriptor() ([]byte, []int) {
+func (m *QueryDemandOrdersRequest) Reset()         { *m = QueryDemandOrdersRequest{} }
+func (m *QueryDemandOrdersRequest) String() string { return proto.CompactTextString(m) }
+func (*QueryDemandOrdersRequest) ProtoMessage()    {}
+func (*QueryDemandOrdersRequest) Descriptor() ([]byte, []int) {
 	return fileDescriptor_39216408ffc70aa8, []int{3}
 }
-func (m *QueryDemandOrdersByStatusRequest) XXX_Unmarshal(b []byte) error {
+func (m *QueryDemandOrdersRequest) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
 }
-func (m *QueryDemandOrdersByStatusRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+func (m *QueryDemandOrdersRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	if deterministic {
-		return xxx_messageInfo_QueryDemandOrdersByStatusRequest.Marshal(b, m, deterministic)
+		return xxx_messageInfo_QueryDemandOrdersRequest.Marshal(b, m, deterministic)
 	} else {
 		b = b[:cap(b)]
 		n, err := m.MarshalToSizedBuffer(b)
@@ -186,23 +192,44 @@ func (m *QueryDemandOrdersByStatusRequest) XXX_Marshal(b []byte, deterministic b
 		return b[:n], nil
 	}
 }
-func (m *QueryDemandOrdersByStatusRequest) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_QueryDemandOrdersByStatusRequest.Merge(m, src)
+func (m *QueryDemandOrdersRequest) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_QueryDemandOrdersRequest.Merge(m, src)
 }
-func (m *QueryDemandOrdersByStatusRequest) XXX_Size() int {
+func (m *QueryDemandOrdersRequest) XXX_Size() int {
 	return m.Size()
 }
-func (m *QueryDemandOrdersByStatusRequest) XXX_DiscardUnknown() {
-	xxx_messageInfo_QueryDemandOrdersByStatusRequest.DiscardUnknown(m)
+func (m *QueryDemandOrdersRequest) XXX_DiscardUnknown() {
+	xxx_messageInfo_QueryDemandOrdersRequest.DiscardUnknown(m)
 }
 
-var xxx_messageInfo_QueryDemandOrdersByStatusRequest proto.InternalMessageInfo
+var xxx_messageInfo_QueryDemandOrdersRequest proto.InternalMessageInfo
 
-func (m *QueryDemandOrdersByStatusRequest) GetStatus() string {
+func (m *QueryDemandOrdersRequest) GetStatus() string {
 	if m != nil {
 		return m.Status
 	}
 	return ""
+}
+
+func (m *QueryDemandOrdersRequest) GetRollappId() string {
+	if m != nil {
+		return m.RollappId
+	}
+	return ""
+}
+
+func (m *QueryDemandOrdersRequest) GetType() string {
+	if m != nil {
+		return m.Type
+	}
+	return ""
+}
+
+func (m *QueryDemandOrdersRequest) GetLimit() int32 {
+	if m != nil {
+		return m.Limit
+	}
+	return 0
 }
 
 // QueryGetDemandOrderResponse is the response type for the Query/GetDemandOrder RPC method.
@@ -251,24 +278,24 @@ func (m *QueryGetDemandOrderResponse) GetDemandOrder() *DemandOrder {
 	return nil
 }
 
-// QueryDemandOrdersByStatusResponse is the response type for the Query/GetDemandOrdersByStatus RPC method.
-type QueryDemandOrdersByStatusResponse struct {
+// QueryDemandOrdersResponse is the response type for the Query/GetDemandOrders RPC method.
+type QueryDemandOrdersResponse struct {
 	// A list of demand orders with the given status
 	DemandOrders []*DemandOrder `protobuf:"bytes,1,rep,name=demand_orders,json=demandOrders,proto3" json:"demand_orders,omitempty"`
 }
 
-func (m *QueryDemandOrdersByStatusResponse) Reset()         { *m = QueryDemandOrdersByStatusResponse{} }
-func (m *QueryDemandOrdersByStatusResponse) String() string { return proto.CompactTextString(m) }
-func (*QueryDemandOrdersByStatusResponse) ProtoMessage()    {}
-func (*QueryDemandOrdersByStatusResponse) Descriptor() ([]byte, []int) {
+func (m *QueryDemandOrdersResponse) Reset()         { *m = QueryDemandOrdersResponse{} }
+func (m *QueryDemandOrdersResponse) String() string { return proto.CompactTextString(m) }
+func (*QueryDemandOrdersResponse) ProtoMessage()    {}
+func (*QueryDemandOrdersResponse) Descriptor() ([]byte, []int) {
 	return fileDescriptor_39216408ffc70aa8, []int{5}
 }
-func (m *QueryDemandOrdersByStatusResponse) XXX_Unmarshal(b []byte) error {
+func (m *QueryDemandOrdersResponse) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
 }
-func (m *QueryDemandOrdersByStatusResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+func (m *QueryDemandOrdersResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	if deterministic {
-		return xxx_messageInfo_QueryDemandOrdersByStatusResponse.Marshal(b, m, deterministic)
+		return xxx_messageInfo_QueryDemandOrdersResponse.Marshal(b, m, deterministic)
 	} else {
 		b = b[:cap(b)]
 		n, err := m.MarshalToSizedBuffer(b)
@@ -278,19 +305,19 @@ func (m *QueryDemandOrdersByStatusResponse) XXX_Marshal(b []byte, deterministic 
 		return b[:n], nil
 	}
 }
-func (m *QueryDemandOrdersByStatusResponse) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_QueryDemandOrdersByStatusResponse.Merge(m, src)
+func (m *QueryDemandOrdersResponse) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_QueryDemandOrdersResponse.Merge(m, src)
 }
-func (m *QueryDemandOrdersByStatusResponse) XXX_Size() int {
+func (m *QueryDemandOrdersResponse) XXX_Size() int {
 	return m.Size()
 }
-func (m *QueryDemandOrdersByStatusResponse) XXX_DiscardUnknown() {
-	xxx_messageInfo_QueryDemandOrdersByStatusResponse.DiscardUnknown(m)
+func (m *QueryDemandOrdersResponse) XXX_DiscardUnknown() {
+	xxx_messageInfo_QueryDemandOrdersResponse.DiscardUnknown(m)
 }
 
-var xxx_messageInfo_QueryDemandOrdersByStatusResponse proto.InternalMessageInfo
+var xxx_messageInfo_QueryDemandOrdersResponse proto.InternalMessageInfo
 
-func (m *QueryDemandOrdersByStatusResponse) GetDemandOrders() []*DemandOrder {
+func (m *QueryDemandOrdersResponse) GetDemandOrders() []*DemandOrder {
 	if m != nil {
 		return m.DemandOrders
 	}
@@ -301,47 +328,50 @@ func init() {
 	proto.RegisterType((*QueryParamsRequest)(nil), "dymensionxyz.dymension.eibc.QueryParamsRequest")
 	proto.RegisterType((*QueryParamsResponse)(nil), "dymensionxyz.dymension.eibc.QueryParamsResponse")
 	proto.RegisterType((*QueryGetDemandOrderRequest)(nil), "dymensionxyz.dymension.eibc.QueryGetDemandOrderRequest")
-	proto.RegisterType((*QueryDemandOrdersByStatusRequest)(nil), "dymensionxyz.dymension.eibc.QueryDemandOrdersByStatusRequest")
+	proto.RegisterType((*QueryDemandOrdersRequest)(nil), "dymensionxyz.dymension.eibc.QueryDemandOrdersRequest")
 	proto.RegisterType((*QueryGetDemandOrderResponse)(nil), "dymensionxyz.dymension.eibc.QueryGetDemandOrderResponse")
-	proto.RegisterType((*QueryDemandOrdersByStatusResponse)(nil), "dymensionxyz.dymension.eibc.QueryDemandOrdersByStatusResponse")
+	proto.RegisterType((*QueryDemandOrdersResponse)(nil), "dymensionxyz.dymension.eibc.QueryDemandOrdersResponse")
 }
 
 func init() { proto.RegisterFile("dymension/eibc/query.proto", fileDescriptor_39216408ffc70aa8) }
 
 var fileDescriptor_39216408ffc70aa8 = []byte{
-	// 503 bytes of a gzipped FileDescriptorProto
-	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x9c, 0x54, 0xcd, 0x6a, 0x14, 0x31,
-	0x1c, 0xdf, 0x59, 0xeb, 0x82, 0xff, 0x56, 0x85, 0xb8, 0x88, 0xcc, 0xca, 0xd8, 0x4e, 0x11, 0x8a,
-	0xca, 0xa4, 0xdb, 0xc5, 0x0f, 0x14, 0x05, 0x17, 0x41, 0xa4, 0x88, 0xba, 0x5e, 0xc4, 0x8b, 0x64,
-	0x36, 0x61, 0x8c, 0x38, 0x93, 0xe9, 0x24, 0x5b, 0x3a, 0x96, 0x5e, 0x7c, 0x02, 0xc1, 0x8b, 0x4f,
-	0xe2, 0xc9, 0x07, 0xe8, 0xb1, 0xe8, 0xc5, 0x93, 0xc8, 0xae, 0x0f, 0x22, 0x93, 0xa4, 0x35, 0xd6,
-	0x75, 0xfa, 0x71, 0xdb, 0x24, 0xbf, 0xcf, 0xe4, 0xbf, 0x03, 0x3e, 0x2d, 0x53, 0x96, 0x49, 0x2e,
-	0x32, 0xcc, 0x78, 0x3c, 0xc4, 0x6b, 0x23, 0x56, 0x94, 0x51, 0x5e, 0x08, 0x25, 0x50, 0x67, 0xef,
-	0x6c, 0xa3, 0x7c, 0x17, 0xed, 0x2d, 0xa2, 0x0a, 0xe8, 0xb7, 0x13, 0x91, 0x08, 0x8d, 0xc3, 0xd5,
-	0x2f, 0x43, 0xf1, 0x2f, 0x26, 0x42, 0x24, 0x6f, 0x19, 0x26, 0x39, 0xc7, 0x24, 0xcb, 0x84, 0x22,
-	0x8a, 0x8b, 0x4c, 0xda, 0xd3, 0x2b, 0x43, 0x21, 0x53, 0x21, 0x71, 0x4c, 0x24, 0x33, 0x4e, 0x78,
-	0xbd, 0x1b, 0x33, 0x45, 0xba, 0x38, 0x27, 0x09, 0xcf, 0x34, 0xd8, 0x62, 0x3b, 0xfb, 0x82, 0xe5,
-	0xa4, 0x20, 0xe9, 0xae, 0xd0, 0xc2, 0xbe, 0x43, 0xca, 0x52, 0x92, 0xd1, 0x57, 0xa2, 0xa0, 0xac,
-	0x30, 0x90, 0xb0, 0x0d, 0xe8, 0x59, 0xe5, 0xf0, 0x54, 0xf3, 0x06, 0x6c, 0x6d, 0xc4, 0xa4, 0x0a,
-	0x5f, 0xc0, 0xb9, 0xbf, 0x76, 0x65, 0x2e, 0x32, 0xc9, 0xd0, 0x7d, 0x68, 0x19, 0xfd, 0x0b, 0xde,
-	0xbc, 0xb7, 0x34, 0xbb, 0xb2, 0x18, 0xd5, 0x54, 0x8f, 0x0c, 0xb9, 0x3f, 0xb3, 0xfd, 0xe3, 0x52,
-	0x63, 0x60, 0x89, 0xe1, 0x35, 0xf0, 0xb5, 0xf2, 0x43, 0xa6, 0x1e, 0xe8, 0x34, 0x4f, 0xaa, 0x30,
-	0xd6, 0x17, 0x9d, 0x81, 0x26, 0xa7, 0x5a, 0xfc, 0xd4, 0xa0, 0xc9, 0x69, 0x78, 0x1b, 0xe6, 0x35,
-	0xda, 0x81, 0xca, 0x7e, 0xf9, 0x5c, 0x11, 0x35, 0xda, 0xcd, 0x8a, 0xce, 0x43, 0x4b, 0xea, 0x0d,
-	0xcb, 0xb3, 0xab, 0xf0, 0x0d, 0x74, 0xa6, 0x3a, 0xd9, 0x2e, 0xab, 0x30, 0xe7, 0x5e, 0x87, 0x6d,
-	0xb4, 0x54, 0xdb, 0xc8, 0xd5, 0x99, 0xa5, 0x7f, 0x16, 0x61, 0x01, 0x0b, 0x35, 0x39, 0xad, 0xe3,
-	0x63, 0x38, 0xed, 0x3a, 0x56, 0x79, 0x4f, 0x1c, 0xc9, 0x72, 0xce, 0xb1, 0x94, 0x2b, 0x9f, 0x67,
-	0xe0, 0xa4, 0x36, 0x45, 0x9f, 0x3c, 0x68, 0x99, 0xcb, 0x46, 0xb8, 0x56, 0xec, 0xdf, 0x97, 0xf6,
-	0x97, 0x0f, 0x4f, 0x30, 0x35, 0xc2, 0xab, 0xef, 0xbf, 0xfd, 0xfa, 0xd8, 0xbc, 0x8c, 0x16, 0xb1,
-	0xcb, 0xc4, 0x53, 0xe7, 0x10, 0x7d, 0xf1, 0xe0, 0xac, 0x53, 0xa1, 0x5f, 0x3e, 0xa2, 0xe8, 0xe6,
-	0xc1, 0x96, 0x53, 0xa7, 0xc3, 0xbf, 0x75, 0x74, 0xa2, 0xcd, 0x7c, 0x43, 0x67, 0x5e, 0x46, 0x51,
-	0x6d, 0x66, 0xf7, 0x75, 0xf0, 0x26, 0xa7, 0x5b, 0xe8, 0xab, 0x07, 0xed, 0x69, 0x6f, 0x8a, 0xee,
-	0x1e, 0x1c, 0xa5, 0x66, 0x66, 0xfd, 0x7b, 0xc7, 0xa5, 0xdb, 0x3e, 0x77, 0x74, 0x9f, 0xeb, 0xa8,
-	0x77, 0xe8, 0x3e, 0x12, 0x6f, 0x9a, 0xff, 0xc5, 0x56, 0x7f, 0x75, 0x7b, 0x1c, 0x78, 0x3b, 0xe3,
-	0xc0, 0xfb, 0x39, 0x0e, 0xbc, 0x0f, 0x93, 0xa0, 0xb1, 0x33, 0x09, 0x1a, 0xdf, 0x27, 0x41, 0xe3,
-	0x65, 0x37, 0xe1, 0xea, 0xf5, 0x28, 0x8e, 0x86, 0x22, 0xfd, 0x9f, 0xf0, 0x7a, 0x0f, 0x6f, 0x18,
-	0x75, 0x55, 0xe6, 0x4c, 0xc6, 0x2d, 0xfd, 0x19, 0xe9, 0xfd, 0x0e, 0x00, 0x00, 0xff, 0xff, 0x37,
-	0x0c, 0x43, 0xa0, 0x21, 0x05, 0x00, 0x00,
+	// 545 bytes of a gzipped FileDescriptorProto
+	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x94, 0x54, 0x4f, 0x6b, 0x13, 0x4d,
+	0x18, 0xcf, 0xa6, 0x49, 0xa0, 0x4f, 0xf3, 0xbe, 0xc2, 0x18, 0x24, 0x6e, 0x74, 0xad, 0x5b, 0x84,
+	0xa0, 0xb2, 0xd3, 0x34, 0xb4, 0x0a, 0x9e, 0x0c, 0x82, 0x94, 0x22, 0x6a, 0x4e, 0xe2, 0xa5, 0x4c,
+	0x32, 0xc3, 0x3a, 0x25, 0xbb, 0xb3, 0xdd, 0x99, 0x94, 0xc6, 0xd0, 0x8b, 0x9f, 0x40, 0xf0, 0xe2,
+	0xc9, 0x0f, 0x22, 0x7e, 0x80, 0x1e, 0x0b, 0x5e, 0x3c, 0x89, 0x24, 0x7e, 0x10, 0xd9, 0x99, 0x69,
+	0x5d, 0x6b, 0x4c, 0x9b, 0xdb, 0xce, 0x3e, 0xbf, 0x7f, 0xcf, 0x33, 0xcf, 0x2e, 0xb8, 0x74, 0x14,
+	0xb1, 0x58, 0x72, 0x11, 0x63, 0xc6, 0x7b, 0x7d, 0xbc, 0x3f, 0x64, 0xe9, 0x28, 0x48, 0x52, 0xa1,
+	0x04, 0x6a, 0x9c, 0xd5, 0x0e, 0x47, 0x6f, 0x83, 0xb3, 0x43, 0x90, 0x01, 0xdd, 0x5a, 0x28, 0x42,
+	0xa1, 0x71, 0x38, 0x7b, 0x32, 0x14, 0xf7, 0x46, 0x28, 0x44, 0x38, 0x60, 0x98, 0x24, 0x1c, 0x93,
+	0x38, 0x16, 0x8a, 0x28, 0x2e, 0x62, 0x69, 0xab, 0x77, 0xfb, 0x42, 0x46, 0x42, 0xe2, 0x1e, 0x91,
+	0xcc, 0x38, 0xe1, 0x83, 0x56, 0x8f, 0x29, 0xd2, 0xc2, 0x09, 0x09, 0x79, 0xac, 0xc1, 0x16, 0xdb,
+	0x38, 0x17, 0x2c, 0x21, 0x29, 0x89, 0x4e, 0x85, 0x6e, 0x9f, 0x2b, 0x52, 0x16, 0x91, 0x98, 0xee,
+	0x8a, 0x94, 0xb2, 0xd4, 0x40, 0xfc, 0x1a, 0xa0, 0x97, 0x99, 0xc3, 0x0b, 0xcd, 0xeb, 0xb2, 0xfd,
+	0x21, 0x93, 0xca, 0x7f, 0x05, 0x57, 0xff, 0x78, 0x2b, 0x13, 0x11, 0x4b, 0x86, 0x1e, 0x43, 0xc5,
+	0xe8, 0xd7, 0x9d, 0x55, 0xa7, 0xb9, 0xb2, 0xb1, 0x16, 0xcc, 0x69, 0x3d, 0x30, 0xe4, 0x4e, 0xe9,
+	0xf8, 0xfb, 0xad, 0x42, 0xd7, 0x12, 0xfd, 0xfb, 0xe0, 0x6a, 0xe5, 0xa7, 0x4c, 0x3d, 0xd1, 0x69,
+	0x9e, 0x67, 0x61, 0xac, 0x2f, 0xfa, 0x1f, 0x8a, 0x9c, 0x6a, 0xf1, 0xe5, 0x6e, 0x91, 0x53, 0x7f,
+	0x0c, 0x75, 0x8d, 0xce, 0x41, 0x4f, 0x33, 0xa2, 0x6b, 0x50, 0x91, 0x8a, 0xa8, 0xa1, 0xb4, 0x78,
+	0x7b, 0x42, 0x37, 0x01, 0x52, 0x31, 0x18, 0x90, 0x24, 0xd9, 0xe5, 0xb4, 0x5e, 0xd4, 0xb5, 0x65,
+	0xfb, 0x66, 0x9b, 0x22, 0x04, 0x25, 0x35, 0x4a, 0x58, 0x7d, 0x49, 0x17, 0xf4, 0x33, 0xaa, 0x41,
+	0x79, 0xc0, 0x23, 0xae, 0xea, 0xa5, 0x55, 0xa7, 0x59, 0xee, 0x9a, 0x83, 0xbf, 0x07, 0x8d, 0x99,
+	0x51, 0xed, 0x30, 0x76, 0xa0, 0x9a, 0x9f, 0xa7, 0x1d, 0x49, 0x73, 0xee, 0x48, 0xf2, 0x3a, 0x2b,
+	0xf4, 0xf7, 0xc1, 0xdf, 0x83, 0xeb, 0x33, 0x1a, 0xb5, 0x4e, 0xcf, 0xe0, 0xbf, 0xbc, 0x53, 0xd6,
+	0xf0, 0xd2, 0x42, 0x56, 0xd5, 0x9c, 0x95, 0xdc, 0xf8, 0x54, 0x82, 0xb2, 0x36, 0x43, 0x1f, 0x1d,
+	0xa8, 0x98, 0x5b, 0x42, 0x78, 0xae, 0xd8, 0xdf, 0x2b, 0xe2, 0xae, 0x5f, 0x9e, 0x60, 0xda, 0xf0,
+	0xef, 0xbd, 0xfb, 0xfa, 0xf3, 0x43, 0xf1, 0x0e, 0x5a, 0xc3, 0x79, 0x26, 0x9e, 0xb9, 0xc0, 0xe8,
+	0x8b, 0x03, 0x57, 0x72, 0x2d, 0x74, 0x46, 0xdb, 0x14, 0x3d, 0xb8, 0xd8, 0x72, 0xe6, 0x5a, 0xb9,
+	0x0f, 0x17, 0x27, 0xda, 0xcc, 0x5b, 0x3a, 0xf3, 0x3a, 0x0a, 0xe6, 0x66, 0xce, 0xdf, 0x0e, 0x1e,
+	0x73, 0x7a, 0x84, 0x3e, 0x3b, 0x50, 0xcd, 0xdf, 0x25, 0xda, 0xbc, 0x38, 0xc2, 0x8c, 0x25, 0x77,
+	0xb7, 0x16, 0xa5, 0xd9, 0xdc, 0x8f, 0x74, 0xee, 0x4d, 0xd4, 0xbe, 0x74, 0x6e, 0x89, 0xc7, 0xe6,
+	0x03, 0x3a, 0xea, 0xec, 0x1c, 0x4f, 0x3c, 0xe7, 0x64, 0xe2, 0x39, 0x3f, 0x26, 0x9e, 0xf3, 0x7e,
+	0xea, 0x15, 0x4e, 0xa6, 0x5e, 0xe1, 0xdb, 0xd4, 0x2b, 0xbc, 0x6e, 0x85, 0x5c, 0xbd, 0x19, 0xf6,
+	0x82, 0xbe, 0x88, 0xfe, 0x25, 0x7c, 0xd0, 0xc6, 0x87, 0x46, 0x3d, 0xfb, 0xb4, 0x64, 0xaf, 0xa2,
+	0xff, 0x33, 0xed, 0x5f, 0x01, 0x00, 0x00, 0xff, 0xff, 0xf1, 0xbf, 0xb6, 0xfe, 0x42, 0x05, 0x00,
+	0x00,
 }
 
 // Reference imports to suppress errors if they are not otherwise used.
@@ -361,7 +391,7 @@ type QueryClient interface {
 	// Queries a Demand Order by id.
 	DemandOrderById(ctx context.Context, in *QueryGetDemandOrderRequest, opts ...grpc.CallOption) (*QueryGetDemandOrderResponse, error)
 	// Queries a list of demand orders by status.
-	DemandOrdersByStatus(ctx context.Context, in *QueryDemandOrdersByStatusRequest, opts ...grpc.CallOption) (*QueryDemandOrdersByStatusResponse, error)
+	DemandOrders(ctx context.Context, in *QueryDemandOrdersRequest, opts ...grpc.CallOption) (*QueryDemandOrdersResponse, error)
 }
 
 type queryClient struct {
@@ -390,9 +420,9 @@ func (c *queryClient) DemandOrderById(ctx context.Context, in *QueryGetDemandOrd
 	return out, nil
 }
 
-func (c *queryClient) DemandOrdersByStatus(ctx context.Context, in *QueryDemandOrdersByStatusRequest, opts ...grpc.CallOption) (*QueryDemandOrdersByStatusResponse, error) {
-	out := new(QueryDemandOrdersByStatusResponse)
-	err := c.cc.Invoke(ctx, "/dymensionxyz.dymension.eibc.Query/DemandOrdersByStatus", in, out, opts...)
+func (c *queryClient) DemandOrders(ctx context.Context, in *QueryDemandOrdersRequest, opts ...grpc.CallOption) (*QueryDemandOrdersResponse, error) {
+	out := new(QueryDemandOrdersResponse)
+	err := c.cc.Invoke(ctx, "/dymensionxyz.dymension.eibc.Query/DemandOrders", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -406,7 +436,7 @@ type QueryServer interface {
 	// Queries a Demand Order by id.
 	DemandOrderById(context.Context, *QueryGetDemandOrderRequest) (*QueryGetDemandOrderResponse, error)
 	// Queries a list of demand orders by status.
-	DemandOrdersByStatus(context.Context, *QueryDemandOrdersByStatusRequest) (*QueryDemandOrdersByStatusResponse, error)
+	DemandOrders(context.Context, *QueryDemandOrdersRequest) (*QueryDemandOrdersResponse, error)
 }
 
 // UnimplementedQueryServer can be embedded to have forward compatible implementations.
@@ -419,8 +449,8 @@ func (*UnimplementedQueryServer) Params(ctx context.Context, req *QueryParamsReq
 func (*UnimplementedQueryServer) DemandOrderById(ctx context.Context, req *QueryGetDemandOrderRequest) (*QueryGetDemandOrderResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DemandOrderById not implemented")
 }
-func (*UnimplementedQueryServer) DemandOrdersByStatus(ctx context.Context, req *QueryDemandOrdersByStatusRequest) (*QueryDemandOrdersByStatusResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method DemandOrdersByStatus not implemented")
+func (*UnimplementedQueryServer) DemandOrders(ctx context.Context, req *QueryDemandOrdersRequest) (*QueryDemandOrdersResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DemandOrders not implemented")
 }
 
 func RegisterQueryServer(s grpc1.Server, srv QueryServer) {
@@ -463,20 +493,20 @@ func _Query_DemandOrderById_Handler(srv interface{}, ctx context.Context, dec fu
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Query_DemandOrdersByStatus_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(QueryDemandOrdersByStatusRequest)
+func _Query_DemandOrders_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(QueryDemandOrdersRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(QueryServer).DemandOrdersByStatus(ctx, in)
+		return srv.(QueryServer).DemandOrders(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/dymensionxyz.dymension.eibc.Query/DemandOrdersByStatus",
+		FullMethod: "/dymensionxyz.dymension.eibc.Query/DemandOrders",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(QueryServer).DemandOrdersByStatus(ctx, req.(*QueryDemandOrdersByStatusRequest))
+		return srv.(QueryServer).DemandOrders(ctx, req.(*QueryDemandOrdersRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -494,8 +524,8 @@ var _Query_serviceDesc = grpc.ServiceDesc{
 			Handler:    _Query_DemandOrderById_Handler,
 		},
 		{
-			MethodName: "DemandOrdersByStatus",
-			Handler:    _Query_DemandOrdersByStatus_Handler,
+			MethodName: "DemandOrders",
+			Handler:    _Query_DemandOrders_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
@@ -588,7 +618,7 @@ func (m *QueryGetDemandOrderRequest) MarshalToSizedBuffer(dAtA []byte) (int, err
 	return len(dAtA) - i, nil
 }
 
-func (m *QueryDemandOrdersByStatusRequest) Marshal() (dAtA []byte, err error) {
+func (m *QueryDemandOrdersRequest) Marshal() (dAtA []byte, err error) {
 	size := m.Size()
 	dAtA = make([]byte, size)
 	n, err := m.MarshalToSizedBuffer(dAtA[:size])
@@ -598,16 +628,35 @@ func (m *QueryDemandOrdersByStatusRequest) Marshal() (dAtA []byte, err error) {
 	return dAtA[:n], nil
 }
 
-func (m *QueryDemandOrdersByStatusRequest) MarshalTo(dAtA []byte) (int, error) {
+func (m *QueryDemandOrdersRequest) MarshalTo(dAtA []byte) (int, error) {
 	size := m.Size()
 	return m.MarshalToSizedBuffer(dAtA[:size])
 }
 
-func (m *QueryDemandOrdersByStatusRequest) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+func (m *QueryDemandOrdersRequest) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 	i := len(dAtA)
 	_ = i
 	var l int
 	_ = l
+	if m.Limit != 0 {
+		i = encodeVarintQuery(dAtA, i, uint64(m.Limit))
+		i--
+		dAtA[i] = 0x20
+	}
+	if len(m.Type) > 0 {
+		i -= len(m.Type)
+		copy(dAtA[i:], m.Type)
+		i = encodeVarintQuery(dAtA, i, uint64(len(m.Type)))
+		i--
+		dAtA[i] = 0x1a
+	}
+	if len(m.RollappId) > 0 {
+		i -= len(m.RollappId)
+		copy(dAtA[i:], m.RollappId)
+		i = encodeVarintQuery(dAtA, i, uint64(len(m.RollappId)))
+		i--
+		dAtA[i] = 0x12
+	}
 	if len(m.Status) > 0 {
 		i -= len(m.Status)
 		copy(dAtA[i:], m.Status)
@@ -653,7 +702,7 @@ func (m *QueryGetDemandOrderResponse) MarshalToSizedBuffer(dAtA []byte) (int, er
 	return len(dAtA) - i, nil
 }
 
-func (m *QueryDemandOrdersByStatusResponse) Marshal() (dAtA []byte, err error) {
+func (m *QueryDemandOrdersResponse) Marshal() (dAtA []byte, err error) {
 	size := m.Size()
 	dAtA = make([]byte, size)
 	n, err := m.MarshalToSizedBuffer(dAtA[:size])
@@ -663,12 +712,12 @@ func (m *QueryDemandOrdersByStatusResponse) Marshal() (dAtA []byte, err error) {
 	return dAtA[:n], nil
 }
 
-func (m *QueryDemandOrdersByStatusResponse) MarshalTo(dAtA []byte) (int, error) {
+func (m *QueryDemandOrdersResponse) MarshalTo(dAtA []byte) (int, error) {
 	size := m.Size()
 	return m.MarshalToSizedBuffer(dAtA[:size])
 }
 
-func (m *QueryDemandOrdersByStatusResponse) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+func (m *QueryDemandOrdersResponse) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 	i := len(dAtA)
 	_ = i
 	var l int
@@ -734,7 +783,7 @@ func (m *QueryGetDemandOrderRequest) Size() (n int) {
 	return n
 }
 
-func (m *QueryDemandOrdersByStatusRequest) Size() (n int) {
+func (m *QueryDemandOrdersRequest) Size() (n int) {
 	if m == nil {
 		return 0
 	}
@@ -743,6 +792,17 @@ func (m *QueryDemandOrdersByStatusRequest) Size() (n int) {
 	l = len(m.Status)
 	if l > 0 {
 		n += 1 + l + sovQuery(uint64(l))
+	}
+	l = len(m.RollappId)
+	if l > 0 {
+		n += 1 + l + sovQuery(uint64(l))
+	}
+	l = len(m.Type)
+	if l > 0 {
+		n += 1 + l + sovQuery(uint64(l))
+	}
+	if m.Limit != 0 {
+		n += 1 + sovQuery(uint64(m.Limit))
 	}
 	return n
 }
@@ -760,7 +820,7 @@ func (m *QueryGetDemandOrderResponse) Size() (n int) {
 	return n
 }
 
-func (m *QueryDemandOrdersByStatusResponse) Size() (n int) {
+func (m *QueryDemandOrdersResponse) Size() (n int) {
 	if m == nil {
 		return 0
 	}
@@ -996,7 +1056,7 @@ func (m *QueryGetDemandOrderRequest) Unmarshal(dAtA []byte) error {
 	}
 	return nil
 }
-func (m *QueryDemandOrdersByStatusRequest) Unmarshal(dAtA []byte) error {
+func (m *QueryDemandOrdersRequest) Unmarshal(dAtA []byte) error {
 	l := len(dAtA)
 	iNdEx := 0
 	for iNdEx < l {
@@ -1019,10 +1079,10 @@ func (m *QueryDemandOrdersByStatusRequest) Unmarshal(dAtA []byte) error {
 		fieldNum := int32(wire >> 3)
 		wireType := int(wire & 0x7)
 		if wireType == 4 {
-			return fmt.Errorf("proto: QueryDemandOrdersByStatusRequest: wiretype end group for non-group")
+			return fmt.Errorf("proto: QueryDemandOrdersRequest: wiretype end group for non-group")
 		}
 		if fieldNum <= 0 {
-			return fmt.Errorf("proto: QueryDemandOrdersByStatusRequest: illegal tag %d (wire type %d)", fieldNum, wire)
+			return fmt.Errorf("proto: QueryDemandOrdersRequest: illegal tag %d (wire type %d)", fieldNum, wire)
 		}
 		switch fieldNum {
 		case 1:
@@ -1057,6 +1117,89 @@ func (m *QueryDemandOrdersByStatusRequest) Unmarshal(dAtA []byte) error {
 			}
 			m.Status = string(dAtA[iNdEx:postIndex])
 			iNdEx = postIndex
+		case 2:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field RollappId", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowQuery
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthQuery
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthQuery
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.RollappId = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		case 3:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Type", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowQuery
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthQuery
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthQuery
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Type = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		case 4:
+			if wireType != 0 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Limit", wireType)
+			}
+			m.Limit = 0
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowQuery
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				m.Limit |= int32(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
 		default:
 			iNdEx = preIndex
 			skippy, err := skipQuery(dAtA[iNdEx:])
@@ -1164,7 +1307,7 @@ func (m *QueryGetDemandOrderResponse) Unmarshal(dAtA []byte) error {
 	}
 	return nil
 }
-func (m *QueryDemandOrdersByStatusResponse) Unmarshal(dAtA []byte) error {
+func (m *QueryDemandOrdersResponse) Unmarshal(dAtA []byte) error {
 	l := len(dAtA)
 	iNdEx := 0
 	for iNdEx < l {
@@ -1187,10 +1330,10 @@ func (m *QueryDemandOrdersByStatusResponse) Unmarshal(dAtA []byte) error {
 		fieldNum := int32(wire >> 3)
 		wireType := int(wire & 0x7)
 		if wireType == 4 {
-			return fmt.Errorf("proto: QueryDemandOrdersByStatusResponse: wiretype end group for non-group")
+			return fmt.Errorf("proto: QueryDemandOrdersResponse: wiretype end group for non-group")
 		}
 		if fieldNum <= 0 {
-			return fmt.Errorf("proto: QueryDemandOrdersByStatusResponse: illegal tag %d (wire type %d)", fieldNum, wire)
+			return fmt.Errorf("proto: QueryDemandOrdersResponse: illegal tag %d (wire type %d)", fieldNum, wire)
 		}
 		switch fieldNum {
 		case 1:

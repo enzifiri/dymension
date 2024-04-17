@@ -2,13 +2,15 @@ package keeper
 
 import (
 	"fmt"
+	"strings"
 
 	"github.com/cosmos/cosmos-sdk/codec"
 	storetypes "github.com/cosmos/cosmos-sdk/store/types"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	paramtypes "github.com/cosmos/cosmos-sdk/x/params/types"
-	commontypes "github.com/dymensionxyz/dymension/v3/x/common/types"
 	"github.com/tendermint/tendermint/libs/log"
+
+	commontypes "github.com/dymensionxyz/dymension/v3/x/common/types"
 
 	"github.com/dymensionxyz/dymension/v3/x/eibc/types"
 )
@@ -156,7 +158,14 @@ func (k Keeper) ListAllDemandOrders(
 	return list, nil
 }
 
-func (k Keeper) ListDemandOrdersByStatus(ctx sdk.Context, status commontypes.Status) (list []*types.DemandOrder, err error) {
+type demandOrdersQuery struct {
+	rollappId string
+	orderType string
+}
+
+type filterOption func(*demandOrdersQuery)
+
+func (k Keeper) ListDemandOrders(ctx sdk.Context, status commontypes.Status, opts ...filterOption) (list []*types.DemandOrder, err error) {
 	store := ctx.KVStore(k.storeKey)
 	var statusPrefix []byte
 
@@ -171,12 +180,24 @@ func (k Keeper) ListDemandOrdersByStatus(ctx sdk.Context, status commontypes.Sta
 		return nil, fmt.Errorf("invalid packet status: %s", status)
 	}
 
+	doq := demandOrdersQuery{}
+
+	for _, opt := range opts {
+		opt(&doq)
+	}
+
 	iterator := sdk.KVStorePrefixIterator(store, statusPrefix)
 	defer iterator.Close() // nolint: errcheck
 
 	for ; iterator.Valid(); iterator.Next() {
 		var val types.DemandOrder
 		k.cdc.MustUnmarshal(iterator.Value(), &val)
+		if doq.rollappId != "" && !strings.Contains(val.TrackingPacketKey, doq.rollappId) {
+			continue
+		}
+		if doq.orderType != "" && !strings.Contains(val.TrackingPacketKey, doq.orderType) {
+			continue
+		}
 		list = append(list, &val)
 	}
 

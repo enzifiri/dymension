@@ -6,6 +6,7 @@ import (
 	"strings"
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
+
 	commontypes "github.com/dymensionxyz/dymension/v3/x/common/types"
 	"github.com/dymensionxyz/dymension/v3/x/eibc/types"
 
@@ -52,7 +53,7 @@ func (q Querier) DemandOrderById(goCtx context.Context, req *types.QueryGetDeman
 	return nil, status.Error(codes.Internal, err.Error())
 }
 
-func (q Querier) DemandOrdersByStatus(goCtx context.Context, req *types.QueryDemandOrdersByStatusRequest) (*types.QueryDemandOrdersByStatusResponse, error) {
+func (q Querier) DemandOrders(goCtx context.Context, req *types.QueryDemandOrdersRequest) (*types.QueryDemandOrdersResponse, error) {
 	if req == nil {
 		return nil, status.Error(codes.InvalidArgument, "empty request")
 	}
@@ -75,11 +76,11 @@ func (q Querier) DemandOrdersByStatus(goCtx context.Context, req *types.QueryDem
 	ctx := sdk.UnwrapSDKContext(goCtx)
 
 	// Get the demand orders by status
-	demandOrders, err := q.ListDemandOrdersByStatus(ctx, statusValue)
+	demandOrders, err := q.ListDemandOrders(ctx, statusValue)
 	if err != nil {
 		return nil, status.Error(codes.Internal, err.Error())
 	}
 
 	// Construct the response
-	return &types.QueryDemandOrdersByStatusResponse{DemandOrders: demandOrders}, nil
+	return &types.QueryDemandOrdersResponse{DemandOrders: demandOrders}, nil
 }

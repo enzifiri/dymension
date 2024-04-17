@@ -4,6 +4,7 @@ import (
 	"fmt"
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
+
 	commontypes "github.com/dymensionxyz/dymension/v3/x/common/types"
 	"github.com/dymensionxyz/dymension/v3/x/eibc/types"
 )
@@ -44,17 +45,17 @@ func DemandOrderCountInvariant(k Keeper) sdk.Invariant {
 			msg += fmt.Sprintf("list all demand orders failed: %v\n", err)
 			broken = true
 		}
-		pendingDemandOrders, err := k.ListDemandOrdersByStatus(ctx, commontypes.Status_PENDING)
+		pendingDemandOrders, err := k.ListDemandOrders(ctx, commontypes.Status_PENDING)
 		if err != nil {
 			msg += fmt.Sprintf("list pending demand orders failed: %v\n", err)
 			broken = true
 		}
-		revertedDemandOrders, err := k.ListDemandOrdersByStatus(ctx, commontypes.Status_REVERTED)
+		revertedDemandOrders, err := k.ListDemandOrders(ctx, commontypes.Status_REVERTED)
 		if err != nil {
 			msg += fmt.Sprintf("list reverted demand orders failed: %v\n", err)
 			broken = true
 		}
-		finalizedDemandOrders, err := k.ListDemandOrdersByStatus(ctx, commontypes.Status_FINALIZED)
+		finalizedDemandOrders, err := k.ListDemandOrders(ctx, commontypes.Status_FINALIZED)
 		if err != nil {
 			msg += fmt.Sprintf("list finalized demand orders failed: %v\n", err)
 			broken = true
